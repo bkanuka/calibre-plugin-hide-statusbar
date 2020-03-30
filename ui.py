@@ -13,8 +13,16 @@ from calibre.gui2.actions import InterfaceAction
 class InterfacePlugin(InterfaceAction):
 
     name = 'Hide Statusbar'
+    action_spec = ('Toggle Statusbar', 'dialog_information.png',
+                        'Toggle Statusbar', 'Ctrl+Shift+S')
 
     def gui_layout_complete(self):
         self.gui.status_bar.hide()
+        self.qaction.triggered.connect(self.toggle)
 
+    def toggle(self):
+        if self.gui.status_bar.isVisible():
+            self.gui.status_bar.hide()
+        else:
+            self.gui.status_bar.show()
 
